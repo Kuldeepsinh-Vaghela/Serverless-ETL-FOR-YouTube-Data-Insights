@@ -1,0 +1,23 @@
+import json
+import awswrangler as wr
+import pandas as pd
+
+
+
+def lambda_handler(event, context):
+    # get the bucket name and key of the s3 object from "event" 
+    s3_bucket = event['Records'][0]['s3']['bucket']['name']
+    s3_key = event['Records'][0]['s3']['object']['key']
+    
+    df_raw = wr.s3.read_json('s3://kd-youtubeanalysis-raw-useast1-dev/json-files/')
+    required_json_data = pd.json_normalize(df_raw['items'])
+    
+    wr_response = wr.s3.to_parquet(
+        df = required_json_data,
+        path = 's3://kd-youtubeanalysis-cleansed-useast1-dev/cleansed_json_files/',
+        database = 'kd-youtubeanalysis-cleansed-glue-database',
+        table = 'cleansed_json_files',
+        dataset = True,
+        )
+    
+    return wr_response
