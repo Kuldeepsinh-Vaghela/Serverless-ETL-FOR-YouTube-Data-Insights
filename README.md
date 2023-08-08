@@ -31,7 +31,7 @@ https://www.kaggle.com/datasets/datasnaek/youtube-new
 
 ## Steps followed
 
-1) Data is uploaded from kaggle website to s3 bucket
+1) Upload the data from kaggle website to a s3 bucket
 2) Use AWS Glue crawler to create AWS Data Catalogue for storing meta data information about the data
 3) Write AWS Lambda function to extract the required part from the nested json data files and converting it to parquet format thereby storing it in new s3 bucket for cleaned data
 4) Create AWS Data Catalogue of this new data
