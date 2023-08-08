@@ -1,6 +1,5 @@
 # Data-Engineering-Youtube-data-analysis-Project
 
-# Data Engineering YouTube Analysis Project by Darshil Parmar
 
 ## Overview
 
@@ -29,3 +28,13 @@ https://www.kaggle.com/datasets/datasnaek/youtube-new
 
 ## Architecture Diagram
 <img src="architecture.jpeg">
+
+## Steps followed
+
+1) Data is uploaded from kaggle website to s3 bucket
+2) Using AWS Glue crawler creating AWS Data Catalogue for storing meta data information about the data
+3) Write AWS Lambda function to extract the required part from the nested json data files and converting it to parquet format thereby storing it in new s3 bucket for cleaned data
+4) Create AWS Data Catalogue of this new data
+5) Write AWS ETL Job to convert the csv file to parquet format and storing it in new s3 bucket for cleaned data
+6) Write AWS ETL Job to extract the required data for analysis and storing it in new s3 bucket for analysis ready data
+7) Visualize this analysis ready data using quicksight
